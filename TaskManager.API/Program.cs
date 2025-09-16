@@ -23,7 +23,8 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
             "http://localhost:3000", 
             "https://localhost:3000",
-            "https://*.vercel.app"  // Allow all Vercel deployments
+            "https://*.vercel.app",  // Allow all Vercel deployments
+            "https://*.up.railway.app"  // Allow all Railway deployments
         )
               .AllowAnyHeader()
               .AllowAnyMethod()
