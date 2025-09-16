@@ -20,7 +20,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("NextJSPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+        policy.WithOrigins(
+            "http://localhost:3000", 
+            "https://localhost:3000",
+            "https://*.vercel.app"  // Allow all Vercel deployments
+        )
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
