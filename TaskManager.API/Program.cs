@@ -23,6 +23,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
             "http://localhost:3000", 
             "https://localhost:3000",
+            "https://task-manager-iota-murex.vercel.app",  // Your specific Vercel domain
             "https://*.vercel.app",  // Allow all Vercel deployments
             "https://*.up.railway.app"  // Allow all Railway deployments
         )
