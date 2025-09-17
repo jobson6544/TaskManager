@@ -79,7 +79,19 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}): Promise<
     const response = await fetch(url, config);
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
+      // Try to get error message from response body
+      let errorMessage = `HTTP error! status: ${response.status} - ${response.statusText}`;
+      try {
+        const errorData = await response.json();
+        if (errorData.message) {
+          errorMessage = errorData.message;
+        } else if (errorData.errors) {
+          errorMessage = JSON.stringify(errorData.errors);
+        }
+      } catch (e) {
+        // If we can't parse JSON, use the original error message
+      }
+      throw new Error(errorMessage);
     }
     
     // Handle empty responses (like 204 No Content)
